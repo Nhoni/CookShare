@@ -4,9 +4,11 @@ namespace App\Entity;
 
 use App\Repository\IngredientRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: IngredientRepository::class)]
+#[UniqueEntity("name")]
 class Ingredient
 {
     #[ORM\Id]
@@ -23,6 +25,9 @@ class Ingredient
 
     #[ORM\Column]
     private ?float $quantite = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $unite = null;
 
     /**
      * Constructeur
@@ -72,6 +77,20 @@ class Ingredient
 
         return $this;
     }
+
+    public function getUnite(): ?string
+    {
+        return $this->unite;
+    }
+
+    public function setUnite(?string $unite): static
+    {
+        $this->unite = $unite;
+
+        return $this;
+    }
+
+   
 
 
 }
