@@ -23,7 +23,7 @@ class AppFixtures extends Fixture
         $this->faker = Factory::create('fr_FR');
     }
 
-    public function load(ObjectManager $manager): void
+    public function load(ObjectManager $manager)
     {
         // Ingredient fixtures
         for ($i = 0; $i < 50; $i++) {
@@ -61,11 +61,10 @@ class AppFixtures extends Fixture
                 ->setPseudo(mt_rand(0, 1) === 1 ? $this->faker->firstname() : null)
                 ->setEmail($this->faker->email())
                 ->setRoles(['ROLE_USER'])
-                ->setPlainPassword('password');
+                ->setPlainPassword('admin');
 
             $manager->persist($user);
         }
-
 
         $manager->flush();
     }
